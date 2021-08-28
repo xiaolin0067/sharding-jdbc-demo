@@ -134,4 +134,14 @@ public class OrderDO {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDO{" +
+                "id=" + id +
+                ", orderAmount=" + orderAmount +
+                ", orderStatus=" + orderStatus +
+                ", userId=" + userId +
+                '}';
+    }
 }
