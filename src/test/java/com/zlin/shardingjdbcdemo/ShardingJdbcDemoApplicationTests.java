@@ -1,6 +1,9 @@
 package com.zlin.shardingjdbcdemo;
 
+import com.zlin.shardingjdbcdemo.dao.AreaDOMapper;
 import com.zlin.shardingjdbcdemo.dao.OrderDOMapper;
+import com.zlin.shardingjdbcdemo.model.AreaDO;
+import com.zlin.shardingjdbcdemo.model.AreaDOExample;
 import com.zlin.shardingjdbcdemo.model.OrderDO;
 import com.zlin.shardingjdbcdemo.model.OrderDOExample;
 import org.junit.jupiter.api.Test;
@@ -15,6 +18,9 @@ class ShardingJdbcDemoApplicationTests {
 
     @Resource
     private OrderDOMapper orderDOMapper;
+
+    @Resource
+    private AreaDOMapper areaDOMapper;
 
     @Test
     void contextLoads() {
@@ -37,5 +43,21 @@ class ShardingJdbcDemoApplicationTests {
         example.createCriteria().andIdEqualTo(2);
         List<OrderDO> orderDOS = orderDOMapper.selectByExample(example);
         orderDOS.forEach(e -> System.out.println(e.toString()));
+    }
+
+    @Test
+    public void testGlobal(){
+        AreaDO area = new AreaDO();
+        area.setId(1);
+        area.setName("上海");
+        areaDOMapper.insert(area);
+    }
+
+    @Test
+    public void selectGlobal() {
+        AreaDOExample example = new AreaDOExample();
+        example.createCriteria().andIdEqualTo(1);
+        List<AreaDO> areaDOS = areaDOMapper.selectByExample(example);
+        areaDOS.forEach(e -> System.out.println(e.toString()));
     }
 }
